@@ -1,31 +1,29 @@
-HEADER = ./inc/.h
+##		SOURCE FILES	###
+HEADER		= 	./inc/.h
+BUILD_DIR	=	./build
+SRC_DIR 	= 	./
 
-SRC_DIR = ./src/
+SRCS_NAME 	=	main.c
 
-SRCS_NAME =	main.c\
-		
-SRCS = 	$(addprefix ${SRC_DIR}, ${SRCS_NAME})
+SRCS		= 	$(addprefix ${SRC_DIR}, ${SRCS_NAME})
+OBJS		=	${SRCS:%.c=$(BUILD_DIR)/%.o}
 
-OBJS =	${SRCS:.c=.o}
+###		DEFINITIONS		###
+NAME		=	name
+LIBFT		= 	./libft/libft.a
+CC			=	cc
 
-NAME =	exec_name	
+CFLAGS		=	-Wall -Wextra -Werror -g3
+LDFLAGS		=	-L./libft -lft
 
-LIBFT = ./libft/libft.a 
+###		RULES		###
+$(BUILD_DIR)/%.o: %.c
+			@mkdir -p $(dir $@)
+			@echo "\033[32m\c"
+			${CC} ${CFLAGS} -c $< -o $@
+			@echo "\033[0m\c"
 
-CC =	cc
-
-CFLAGSDEV =	-Wall -Wextra -Werror -g3
-
-CFLAGS =	-Wall -Wextra -Werror
-
-LDFLAGS =	-L./libft -lft
-
-.c.o:	
-		@echo "\033[32m\c"
-		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
-		@echo "\033[0m\c"
-
-all:	${NAME}
+all:		${NAME}
 
 ${NAME}:	${OBJS} ${HEADER} ${LIBFT}
 			@echo "\033[32m\c"
@@ -38,15 +36,15 @@ ${LIBFT}:
 			@echo "\033[33mlibft compiled\033[0m"
 
 clean:
-		@rm -rf ${OBJS}
-		@echo "\033[32m${NAME} obj cleaned"
-		@make --no-print-directory clean -C libft/
+			@rm -rf ${OBJS}
+			@echo "\033[32m${NAME} obj cleaned"
+			@make --no-print-directory clean -C libft/
 
 fclean:		clean
-		@rm -rf ${NAME}
-		@echo "\033[32m${NAME} fcleaned"
-		@make --no-print-directory fclean -C libft/
+			@rm -rf ${NAME}
+			@echo "\033[32m${NAME} fcleaned"
+			@make --no-print-directory fclean -C libft/
 
-re:		fclean all
+re:			fclean all
 
-.PHONY:	all clean re
+.PHONY:		all clean re
