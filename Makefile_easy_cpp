@@ -1,17 +1,16 @@
 ##		SOURCE FILES	###
+HEADERS		=	truc.hpp
 BUILD_DIR	=	./build
 SRC_DIR 	= 	./
+vpath %.cpp ${SRCS_NAME}
 
-HEADERS		=	
 SRCS_NAME 	=	truc.cpp
-
-SRCS		= 	$(addprefix ${SRC_DIR}, ${SRCS_NAME})
 OBJS		=	${SRCS:%.cpp=$(BUILD_DIR)/%.o}
 
 ###		DEFINITIONS		###
 NAME		=	truc
 CXX			=	c++
-CXXFLAGS		=	-Wall -Wextra -Werror -std=c++98
+CXXFLAGS	=	-Wall -Wextra -Werror -std=c++98
 
 ###		RULES		###
 $(BUILD_DIR)/%.o: %.cpp ${HEADERS}

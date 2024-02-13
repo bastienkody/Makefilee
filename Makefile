@@ -2,10 +2,14 @@
 HEADER		= 	./inc/.h
 BUILD_DIR	=	./build
 SRC_DIR 	= 	./
+OTHER_DIR 	= 	./other/
+vpath %.c ${SRC_DIR} ${OTHER_DIR}
 
-SRCS_NAME 	=	main.c
+SRCS_FILES 	=	main.c
 
-SRCS		= 	$(addprefix ${SRC_DIR}, ${SRCS_NAME})
+OTHER_FILES =	other.c
+
+SRCS		= 	${SRCS_FILES} ${OTHER_FILES}
 OBJS		=	${SRCS:%.c=$(BUILD_DIR)/%.o}
 
 ###		DEFINITIONS		###
